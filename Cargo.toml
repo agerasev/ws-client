@@ -1,0 +1,8 @@
+[package]
+name = "ws-client"
+version = "0.1.0"
+authors = ["gerasyov-2427"]
+
+[dependencies]
+net2 = "0.2.27"
+websocket-vi = { version = "0.18.0", default-features = false }
