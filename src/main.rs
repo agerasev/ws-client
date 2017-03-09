@@ -1,12 +1,12 @@
 extern crate net2;
-extern crate websocket_vi;
+extern crate websocket_reuseaddr as websocket;
 
 use std::net::{SocketAddrV4, Ipv4Addr};
 
 use net2::{TcpBuilder};
 
-use websocket_vi::{Client, Message, /*Sender, */Receiver};
-use websocket_vi::client::request::Url;
+use websocket::{Client, Message, /*Sender, */Receiver};
+use websocket::client::request::Url;
 
 fn main() {
 	let url = Url::parse("ws://tracker-nthend.rhcloud.com:8000/peers").unwrap();
@@ -21,7 +21,7 @@ fn main() {
 	let tcp = TcpBuilder::new_v4().unwrap();
 	tcp.reuse_address(true).unwrap().only_v6(false).unwrap();
 
-	let listener = tcp.bind(SocketAddrV4::new(Ipv4Addr::new(0,0,0,0), addr.port())).unwrap().listen(5).unwrap();
+	let listener = tcp.bind(SocketAddrV4::new(Ipv4Addr::new(0,0,0,0), addr.port())).unwrap().listen(128).unwrap();
 
 	for stream in listener.incoming() {
 		match stream {
