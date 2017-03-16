@@ -5,4 +5,4 @@ authors = ["gerasyov-2427"]
 
 [dependencies]
 net2 = "0.2.27"
-websocket-reuseaddr = { git = "https://github.com/nthend/rust-websocket.git", branch = "master", default-features = false }
+websocket-reuseaddr = { path = "websocket", default-features = false, features = ["reuseaddr"] }
